@@ -6,23 +6,23 @@
 
  defined( 'ABSPATH') or die('No Authorized Access!');
 
- add_action( 'acf/init','cta_block_settings' );
+ function cta_block_settings() {
 
- function cta_block_settings(){
+	// Register content block
+	acf_register_block_type(array(
+		'name'				=> 'customblock',
+		'title'				=> __('Custom Block'),
+		'description'		=> __('A Custom Block for Wordpress Site'),
+		'render_template'   => plugin_dir_path(__FILE__) . '/template/templateblock.php',
+		'category'			=> 'design',
+		'icon'				=> 'html',
+		'keywords'			=> array( 'Block', 'Wordpress' ),
+	));
+}
 
-    if( function_exists( 'acf_register_block_type'  )){
-
-        acf_register_block_type( array(
-            'name'                  => 'customblocksettings',
-            'title'                 => __('Custom Block Settings'),
-            'description'           => __('A Custom Block Settings for Wodpress'),
-            'render_template'       => plugins_url( 'template/templateblock.php', __FILE__ ),
-            'category'              => 'design',
-            'icon'                  => 'html',
-            'keywords'              => array( 'html','wordpress' ),            
-        ));
-    }
- }
+if( function_exists( 'acf_register_block_type' ) ) {
+	add_action( 'acf/init', 'cta_block_settings' );
+}
 
  function custom_colors(){
 
